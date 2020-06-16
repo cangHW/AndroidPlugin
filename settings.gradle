@@ -1,0 +1,2 @@
+include ':app', ':PluginLib', ':testbuildjar', ':TestModule', ':TestJavaModule'
+rootProject.name='AndroidPlugin'

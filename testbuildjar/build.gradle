@@ -1,0 +1,113 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+configurations { conf }
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':TestModule')
+    implementation project(path: ':TestJavaModule')
+}
+
+tasks.create(name:"ceshi",group: "asd") doLast {
+
+
+    project.configurations.all { configuration ->
+        def name = configuration.name
+        System.out.println("this configuration is ${name}")
+        if (name != "conf") {
+            return
+        }
+        //为Project加入Gson依赖
+        configuration.dependencies.add(project.dependencies.create("com.google.code.gson:gson:2.8.2"))
+    }
+
+    project.configurations.implementation.setCanBeResolved(true)
+    project.configurations.implementation.collect { file->
+        println("====================="+file)
+    }
+}
+
+
+//
+//configurations['conf'].defaultDependencies { dependencies ->
+//          dependencies.add(owner.project.dependencies.create("org.gradle:my-util:1.0"))
+//     }
+
+
+
+
+
+
+
+def proDir = "testbuildjar/build" + File.separator
+def outPath = "build" + File.separator + "outputs" + File.separator + "aar" + File.separator
+def jarPath = "testbuildjar/" + outPath + "testbuildjar-release.aar"
+
+def androidModule = "TestModule" + File.separator + outPath + "TestModule-release.aar"
+
+def javaModule = "TestJavaModule" + File.separator + "build" + File.separator +"libs"+ File.separator +"TestJavaModule.jar"
+
+def clear1 = project.buildDir.absolutePath + File.separator + "outputs" + File.separator + "aar" + File.separator + "build.jar"
+def clear2 = project.buildDir.absolutePath + File.separator + "outputs" + File.separator + "aar" + File.separator + "build-ProGuard.jar"
+
+ext.BuildJar = [
+        group        : 'aa',
+        doFirstTask  : [
+                ":testbuildjar:assembleRelease",
+                ":TestModule:assembleRelease",
+                ":TestJavaModule:assemble"
+        ],
+        clearPath    : [clear1, clear2],
+        jarName      : 'build',
+        isShrink     : false,
+        inputJarPath : [jarPath,androidModule,javaModule],
+        outputJarPath: outPath,
+        rulesPath    : 'proguard-rules.pro'
+]
+
+//Object object = project.BuildJar
+
+
+//apply plugin: 'com.cloud.buildjar'
+
+//Object object = project.buildJar
+//println("+++++++++=  " + project.projectDir + File.separator + object.getInputProGuardJarPath())
+
+//tasks.create(name:"ceshi",group: "asd",dependsOn: [":TestModule:assembleRelease",":TestJavaModule:assemble"]) doLast {
+//    project.configurations.implementation.setCanBeResolved(true)
+//    project.configurations.implementation.collect { file->
+//        println("====================="+file)
+//    }
+//}
+
+
