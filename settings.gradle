@@ -1,2 +1,6 @@
-include ':app', ':BuildJar', ':testbuildjar', ':TestModule', ':TestJavaModule'
-rootProject.name='AndroidPlugin'
+include ':app'
+include ':BuildPlugin'
+include ':Test:Buildjar'
+include ':Test:TestAndroidModule'
+include ':Test:TestJavaModule'
+rootProject.name = 'AndroidPlugin'

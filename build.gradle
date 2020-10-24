@@ -8,12 +8,10 @@ buildscript {
 
         google()
         jcenter()
-
-
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath 'com.chx.plugin:buildJar:1.0.1'
+        classpath 'com.chx.plugin:buildJar:1.0.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 
@@ -31,8 +29,6 @@ allprojects {
 
         google()
         jcenter()
-
-
     }
 }
 
