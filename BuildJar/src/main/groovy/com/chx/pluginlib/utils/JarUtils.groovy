@@ -13,13 +13,17 @@ class JarUtils {
             return files
         }
         paths.each { path ->
-            File pathFile = new File(project.rootProject.rootDir.path + File.separator + path)
-            if (path.endsWith(File.separator)) {
-                addFromDir(pathFile, files,project)
-            } else if (path.endsWith("aar")) {
-                addAAR(pathFile, files,project)
-            } else if (path.endsWith("jar")) {
-                addJAR(pathFile, files)
+            File pathFile = new File(path)
+            if (pathFile.exists()) {
+                if (path.endsWith(File.separator)) {
+                    addFromDir(pathFile, files, project)
+                } else if (path.endsWith("aar")) {
+                    addAAR(pathFile, files, project)
+                } else if (path.endsWith("jar")) {
+                    addJAR(pathFile, files)
+                }
+            } else {
+                System.err.println("The file is empty : " + path)
             }
         }
 
@@ -30,7 +34,7 @@ class JarUtils {
         dirFile.traverse { file ->
             String path = file.path
             if (path.endsWith("aar")) {
-                addAAR(file, files,project)
+                addAAR(file, files, project)
             } else if (path.endsWith("jar")) {
                 addJAR(file, files)
             }
@@ -39,7 +43,7 @@ class JarUtils {
 
     private static void addAAR(File aarFile, List<File> files, Project project) {
         for (File file : project.rootProject.zipTree(aarFile).getFiles()) {
-            if (file.getName() == "classes.jar") {
+            if (file.getName().endsWith(".jar")) {
                 addJAR(file, files)
             }
         }

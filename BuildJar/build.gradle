@@ -1,52 +1,52 @@
 apply plugin: 'groovy'
-//apply plugin: 'maven'
+apply plugin: 'maven'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile gradleApi()
-    compile localGroovy()
+    implementation gradleApi()
+    implementation localGroovy()
 }
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
 
 
-//apply plugin: 'maven'
-//uploadArchives {
-//    repositories.mavenDeployer {
-//        // 本地存放目录(自行选择)，可放在gradle.properties文件中引用
-//        def mavenDirPath = file(project.projectDir.path + File.separator + "plugin")
-//        // 必须双引号，单引号不会转义$
-//        repository(url: "file://${mavenDirPath.absolutePath}")
-//        pom.project {
-//            groupId "com.chx.plugin" // 可以随意取，一般取包名
-//            artifactId "buildJar" // 可以随意取，一般取库的名字
-//            version "1.0.0" // 版本号
-//        }
-//    }
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        // 本地存放目录(自行选择)，可放在gradle.properties文件中引用
+        def mavenDirPath = file(project.projectDir.path + File.separator + "plugin")
+        // 必须双引号，单引号不会转义$
+        repository(url: "file://${mavenDirPath.absolutePath}")
+        pom.project {
+            groupId "com.chx.plugin" // 可以随意取，一般取包名
+            artifactId "buildJar" // 可以随意取，一般取库的名字
+            version "1.0.1" // 版本号
+        }
+    }
+}
+
+
+//ext {
+//    bintrayName = 'BuildJar'
+//    artifact = bintrayName
+//    libraryName = '一个用于混淆打包的依赖库'
+//    libraryDescription = '一个用于混淆打包的依赖库'
+//    libraryVersion = PluginLibVersion
 //}
-
-
-ext {
-    bintrayName = 'BuildJar'
-    artifact = bintrayName
-    libraryName = '一个用于混淆打包的依赖库'
-    libraryDescription = '一个用于混淆打包的依赖库'
-    libraryVersion = PluginLibVersion
-}
-
-
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'
-
-
-Task bintrayUpload =tasks.getByName("bintrayUpload")
-Task clean =tasks.getByName("clean")
-Task upload =tasks.create("upload")
-upload.setGroup("upload")
-upload.doLast {
-    println("上传成功")
-}
-
-bintrayUpload.dependsOn(clean)
-upload.dependsOn(bintrayUpload)
+//
+//
+//apply from: '../install.gradle'
+//apply from: '../bintray.gradle'
+//
+//
+//Task bintrayUpload =tasks.getByName("bintrayUpload")
+//Task clean =tasks.getByName("clean")
+//Task upload =tasks.create("upload")
+//upload.setGroup("upload")
+//upload.doLast {
+//    println("上传成功")
+//}
+//
+//bintrayUpload.dependsOn(clean)
+//upload.dependsOn(bintrayUpload)

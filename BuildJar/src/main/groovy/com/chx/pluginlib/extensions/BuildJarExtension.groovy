@@ -30,6 +30,11 @@ class BuildJarExtension {
     String[] inputJarPath = []
 
     /**
+     * 需要从 jar 包中过滤的文件
+     * */
+    String[] excludesFromJar = []
+
+    /**
      * 输出jar的路径
      * */
     String outputJarPath = ""
@@ -70,7 +75,7 @@ class BuildJarExtension {
     /**
      * 混淆文件的路径
      * */
-    String rulesPath = ""
+    String rulesPath = "proguard-rules.pro"
 
     String getGroup() {
         return group
@@ -88,33 +93,53 @@ class BuildJarExtension {
         return inputJarPath
     }
 
+    String[] getExcludesFromJar() {
+        return excludesFromJar
+    }
+
     String getOutputJarPath() {
-        return outputJarPath
+        if (outputJarPath.endsWith(File.separator)) {
+            return outputJarPath
+        }
+        return outputJarPath + File.separator
     }
 
     String getJarName() {
-        return jarName
+        if (jarName.endsWith(".jar")) {
+            return jarName
+        }
+        return jarName + ".jar"
     }
 
     String getInputProGuardJarPath() {
         if (inputProGuardJarPath != null && inputProGuardJarPath != "") {
-            return inputProGuardJarPath
+            if (inputProGuardJarPath.endsWith(File.separator)) {
+                return inputProGuardJarPath
+            }
+            return inputProGuardJarPath + File.separator
         }
         return getOutputJarPath() + getJarName()
     }
 
     String getOutputProGuardJarPath() {
         if (outputProGuardJarPath != null && outputProGuardJarPath != "") {
-            return outputProGuardJarPath
+            if (outputProGuardJarPath.endsWith(File.separator)) {
+                return outputProGuardJarPath
+            }
+            return outputProGuardJarPath + File.separator
         }
         return getOutputJarPath()
     }
 
     String getProGuardJarName() {
         if (proGuardJarName != null && proGuardJarName != "") {
-            return proGuardJarName
+            if (proGuardJarName.endsWith(".jar")) {
+                return proGuardJarName
+            }
+            return proGuardJarName + ".jar"
         }
-        return getJarName() + "-ProGuard"
+        def name = getJarName()
+        return name.substring(0, name.length() - 4) + "-ProGuard" + ".jar"
     }
 
     boolean getIsShrink() {

@@ -4,7 +4,7 @@ import com.chx.pluginlib.extensions.BuildJarExtension
 import com.chx.pluginlib.task.BuildJarTask
 import com.chx.pluginlib.task.ClearJarTask
 import com.chx.pluginlib.task.ProGuardJarTask
-import com.chx.pluginlib.utils.DataConver
+import com.chx.pluginlib.utils.DataConverter
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -14,15 +14,25 @@ import org.gradle.api.Project
 class PluginImpl implements Plugin<Project> {
     @Override
     void apply(Project project) {
-        createExtensions(project)
+        if (!createExtensions(project)) {
+            System.err.println("The Plugin init error, please check the CloudPluginData{}")
+            System.err.println("You need to create the CloudPluginData{} first and then rely on the remote plug-in：apply plugin: 'com.cloud.buildjar'")
+            throw new IllegalAccessError("Check the build log")
+        }
         createTask(project)
     }
 
-    static void createExtensions(Project project) {
+    static boolean createExtensions(Project project) {
         project.getExtensions().create("buildJar", BuildJarExtension)
         BuildJarExtension buildJarExtension = project.buildJar
-        Object object = project.BuildJar
-        DataConver.converter(buildJarExtension,object)
+        try {
+            Object object = project.CloudPluginData
+            DataConverter.converter(buildJarExtension, object,project)
+            return true
+        } catch (Throwable throwable) {
+            System.err.println(throwable.getMessage())
+        }
+        return false
     }
 
     static void createTask(Project project) {

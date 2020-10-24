@@ -17,19 +17,16 @@ class ProGuardJarTask extends BaseProGuard {
         setJarParams(buildJarExtension)
         addRunTime()
         addLibrarys(buildJarExtension)
-        addLibrarysDefault()
         super.proguard()
     }
 
     void setJarParams(BuildJarExtension buildJarExtension) {
         configuration(buildJarExtension.getRulesPath())
 
-        String inPath = project.projectDir.absolutePath + File.separator + buildJarExtension.getInputProGuardJarPath() + ".jar"
-        println("injars+++++++++++++++" + inPath)
+        String inPath = buildJarExtension.getInputProGuardJarPath()
         injars(inPath)
 
-        String outPath = project.projectDir.absolutePath + File.separator + buildJarExtension.getOutputProGuardJarPath() + File.separator + buildJarExtension.getProGuardJarName() + ".jar"
-        println("outjars+++++++++++++++" + outPath)
+        String outPath = buildJarExtension.getOutputProGuardJarPath() + buildJarExtension.getProGuardJarName()
         outjars(outPath)
 
         if (!buildJarExtension.getIsShrink()) {
@@ -66,9 +63,5 @@ class ProGuardJarTask extends BaseProGuard {
             String path = file.path
             libraryjars(path)
         }
-    }
-
-    void addLibrarysDefault() {
-
     }
 }

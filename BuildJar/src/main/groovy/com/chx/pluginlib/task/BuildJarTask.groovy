@@ -9,39 +9,35 @@ import com.chx.pluginlib.utils.JarUtils
  */
 class BuildJarTask extends BaseJar {
 
-    BuildJarTask(){
+    BuildJarTask() {
         BuildJarExtension buildJarExtension = project.buildJar
-
-        archiveFileName.set(buildJarExtension.getJarName()+".jar")
-
+        archiveFileName.set(buildJarExtension.getJarName())
         destinationDirectory.set(new File(buildJarExtension.getOutputJarPath()))
-//        destinationDirectory.set(project.file(new File(buildJarExtension.outputJarPath)))
-//        archiveFile.set(destinationDirectory.file(archiveFileName))
-
-        println("setJarParams   "+"+++++++++++++++"+"  into  success ")
-
-        println("archiveName   "+"+++++++++++++++"+"  into  success "+archiveName)
-        println("archivePath   "+"+++++++++++++++"+"  into  success "+archivePath)
     }
 
     @Override
     protected void copy() {
         BuildJarExtension buildJarExtension = project.buildJar
-        from(getFileTree(buildJarExtension.getInputJarPath()))
-        println("setJarParams   "+"+++++++++++++++"+"  from  success ")
+        from(getFileTree(buildJarExtension))
         super.copy()
     }
 
-    List<File> getFileTree(String[] paths) {
+    List<File> getFileTree(BuildJarExtension buildJarExtension) {
         List<File> files = new ArrayList<>()
+        List<File> jarFiles = JarUtils.getJarsFromPaths(buildJarExtension.getInputJarPath(), project)
 
-        List<File> jarFiles = JarUtils.getJarsFromPaths(paths, project)
-
-        println("setJarParams   "+"+++++++++++++++"+"  getFileTree  success " +jarFiles)
+        println("start to create jar")
         for (File jarFile : jarFiles) {
-            def file = project.rootProject.zipTree(jarFile)["asFileTrees"].get(0).getDir()
-            files.add(file)
+            try {
+                exclude(buildJarExtension.getExcludesFromJar())
+                def file = project.rootProject.zipTree(jarFile)["asFileTrees"].get(0).getDir()
+                println("add file : " + jarFile)
+                files.add(file)
+            } catch (Throwable throwable) {
+                println(throwable)
+            }
         }
+        println("end to create jar")
 
         return files
     }
