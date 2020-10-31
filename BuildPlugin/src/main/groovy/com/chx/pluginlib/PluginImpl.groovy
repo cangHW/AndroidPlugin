@@ -7,6 +7,7 @@ import com.chx.pluginlib.task.ProGuardJarTask
 import com.chx.pluginlib.utils.DataConverter
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 
 /**
  * @author: cangHX* on 2020/06/15  10:23
@@ -27,11 +28,11 @@ class PluginImpl implements Plugin<Project> {
     }
 
     static boolean createExtensions(Project project) {
-        project.getExtensions().create("buildJar", BuildJarExtension)
-        BuildJarExtension buildJarExtension = project.buildJar
+        project.getExtensions().create("buildJarExtension", BuildJarExtension)
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         try {
             Object object = project.CloudPluginData
-            DataConverter.converter(buildJarExtension, object,project)
+            DataConverter.converter(buildJarExtension, object, project)
             return true
         } catch (Throwable throwable) {
             System.err.println(throwable.getMessage())
@@ -40,15 +41,34 @@ class PluginImpl implements Plugin<Project> {
     }
 
     static void createTask(Project project) {
-        BuildJarExtension buildJarExtension = project.buildJar
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         String group = buildJarExtension.group
 
-        ClearJarTask clearJarTask = project.tasks.create(name: "clearJarTask", group: group, type: ClearJarTask)
-        BuildJarTask buildJarTask = project.tasks.create(name: "buildJar", group: group, type: BuildJarTask)
-        ProGuardJarTask proGuardJarTask = project.tasks.create(name: "proGuardJarTask", group: group, type: ProGuardJarTask)
+        def pluginTasks = []
 
-        clearJarTask.dependsOn(buildJarExtension.doFirstTask)
-        buildJarTask.dependsOn(clearJarTask)
-        proGuardJarTask.dependsOn(buildJarTask)
+        ClearJarTask clearJarTask = project.tasks.create(name: "clearJarTask", group: group, type: ClearJarTask)
+        pluginTasks.add(clearJarTask)
+
+        if (buildJarExtension.inputJarPath.length != 0) {
+            BuildJarTask buildJarTask = project.tasks.create(name: "buildJar", group: group, type: BuildJarTask)
+            pluginTasks.add(buildJarTask)
+        } else {
+            System.out.println("clear BuildJarTask")
+        }
+
+        ProGuardJarTask proGuardJarTask = project.tasks.create(name: "proGuardJarTask", group: group, type: ProGuardJarTask)
+        pluginTasks.add(proGuardJarTask)
+
+        Task currentTask = null
+        for (int i = 0; i < pluginTasks.size(); i++) {
+            Task it =  (Task)pluginTasks[i]
+
+            if (currentTask == null) {
+                it.dependsOn(buildJarExtension.doFirstTask)
+            } else {
+                it.dependsOn(currentTask)
+            }
+            currentTask = it
+        }
     }
 }

@@ -16,7 +16,7 @@ class DataConverter {
         log.println("")
 
         String group = object.group
-        if (group != null && group != "") {
+        if (group != null && group.trim() != "") {
             extension.group = group
         }
         log.println("       group : " + extension.group)
@@ -36,13 +36,6 @@ class DataConverter {
         log.println("       clearPath : " + extension.clearPath)
         log.println("")
 
-        String[] inputJarPath = object.inputJarPath
-        if (inputJarPath != null && inputJarPath.length != 0) {
-            extension.inputJarPath = inputJarPath
-        }
-        log.println("       inputJarPath : " + extension.inputJarPath)
-        log.println("")
-
         String[] excludesFromJar = object.excludesFromJar
         if (excludesFromJar != null && excludesFromJar.length != 0) {
             extension.excludesFromJar = excludesFromJar
@@ -50,41 +43,49 @@ class DataConverter {
         log.println("       excludesFromJar : " + extension.excludesFromJar)
         log.println("")
 
-        String outputJarPath = object.outputJarPath
-        if (outputJarPath != null && outputJarPath != "") {
-            extension.outputJarPath = outputJarPath
-        } else {
-            extension.outputJarPath = project.buildDir.path + File.separator + "jar"
+        String[] inputJarPath = object.inputJarPath
+        if (inputJarPath != null && inputJarPath.length != 0) {
+            extension.inputJarPath = inputJarPath
         }
-        log.println("       outputJarPath : " + extension.outputJarPath)
+        log.println("       inputJarPath : " + extension.inputJarPath)
         log.println("")
 
         String jarName = object.jarName
-        if (jarName != null && jarName != "") {
+        if (jarName != null && jarName.trim() != "") {
             extension.jarName = jarName
         }
         log.println("       jarName : " + extension.jarName)
         log.println("")
 
+        String outputJarPath = object.outputJarPath
+        if (outputJarPath != null && outputJarPath.trim() != "") {
+            extension.outputJarPath = outputJarPath
+        }
+        if (extension.outputJarPath == null || extension.outputJarPath.trim() == ""){
+            extension.outputJarPath = project.buildDir.path + File.separator + "jar"
+        }
+        log.println("       outputJarPath : " + extension.outputJarPath)
+        log.println("")
+
         String inputProGuardJarPath = object.inputProGuardJarPath
-        if (inputProGuardJarPath != null && inputProGuardJarPath != "") {
+        if (inputProGuardJarPath != null && inputProGuardJarPath.trim() != "") {
             extension.inputProGuardJarPath = inputProGuardJarPath
         }
         log.println("       inputProGuardJarPath : " + extension.inputProGuardJarPath)
         log.println("")
 
-        String outputProGuardJarPath = object.outputProGuardJarPath
-        if (outputProGuardJarPath != null && outputProGuardJarPath != "") {
-            extension.outputProGuardJarPath = outputProGuardJarPath
-        }
-        log.println("       outputProGuardJarPath : " + extension.outputProGuardJarPath)
-        log.println("")
-
         String proGuardJarName = object.proGuardJarName
-        if (proGuardJarName != null && proGuardJarName != "") {
+        if (proGuardJarName != null && proGuardJarName.trim() != "") {
             extension.proGuardJarName = proGuardJarName
         }
         log.println("       proGuardJarName : " + extension.proGuardJarName)
+        log.println("")
+
+        String outputProGuardJarPath = object.outputProGuardJarPath
+        if (outputProGuardJarPath != null && outputProGuardJarPath.trim() != "") {
+            extension.outputProGuardJarPath = outputProGuardJarPath
+        }
+        log.println("       outputProGuardJarPath : " + extension.outputProGuardJarPath)
         log.println("")
 
         def isShrink = object.isShrink
@@ -106,7 +107,7 @@ class DataConverter {
         log.println("")
 
         String rulesPath = object.rulesPath
-        if (rulesPath != null && rulesPath != "") {
+        if (rulesPath != null && rulesPath.trim() != "") {
             extension.rulesPath = rulesPath
         }
         log.println("       rulesPath : " + extension.rulesPath)

@@ -139,7 +139,7 @@ class BuildJarExtension {
             return proGuardJarName + ".jar"
         }
         def name = getJarName()
-        return name.substring(0, name.length() - 4) + "-ProGuard" + ".jar"
+        return name.substring(0, name.length() - 4) + "-ProGuard.jar"
     }
 
     boolean getIsShrink() {

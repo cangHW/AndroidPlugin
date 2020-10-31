@@ -10,14 +10,14 @@ import com.chx.pluginlib.utils.JarUtils
 class BuildJarTask extends BaseJar {
 
     BuildJarTask() {
-        BuildJarExtension buildJarExtension = project.buildJar
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         archiveFileName.set(buildJarExtension.getJarName())
         destinationDirectory.set(new File(buildJarExtension.getOutputJarPath()))
     }
 
     @Override
     protected void copy() {
-        BuildJarExtension buildJarExtension = project.buildJar
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         from(getFileTree(buildJarExtension))
         super.copy()
     }

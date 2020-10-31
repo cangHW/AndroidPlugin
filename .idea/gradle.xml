@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BuildPlugin" />
             <option value="$PROJECT_DIR$/Test" />
-            <option value="$PROJECT_DIR$/Test/Buildjar" />
+            <option value="$PROJECT_DIR$/Test/BuildJar" />
             <option value="$PROJECT_DIR$/Test/TestAndroidModule" />
             <option value="$PROJECT_DIR$/Test/TestJavaModule" />
             <option value="$PROJECT_DIR$/app" />

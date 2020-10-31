@@ -1,0 +1,126 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':Test:TestAndroidModule')
+    implementation project(path: ':Test:TestJavaModule')
+}
+
+def outPath = "build" + File.separator + "outputs" + File.separator + "aar" + File.separator
+def jarPath = rootDir.path + File.separator + "Test" + File.separator + "BuildJar/" + outPath + "BuildJar-release.aar"
+
+def androidModule = rootDir.path + File.separator + "Test" + File.separator + "TestAndroidModule" + File.separator + outPath + "TestAndroidModule-release.aar"
+
+def javaModule = rootDir.path + File.separator + "Test" + File.separator + "TestJavaModule" + File.separator + "build" + File.separator + "libs" + File.separator + "TestJavaModule.jar"
+
+def clear1 = project.buildDir.absolutePath + File.separator + "outputs" + File.separator + "aar" + File.separator + "xxxxx.jar"
+def clear2 = project.buildDir.absolutePath + File.separator + "outputs" + File.separator + "aar" + File.separator + "xxxxx-ProGuard.jar"
+
+ext.CloudPluginData = [
+        //任务组名称，默认为：pluglib
+        group                : 'aa',
+
+        //前置任务，插件执行之前需要提前执行的任务。
+        //主要用于生成 JAR 包合并，在合并前生成 JAR 包
+        doFirstTask          : [
+                //例如：生成 BuildJar 模块的 AAR 文件
+                ":Test:BuildJar:assembleRelease",
+                //例如：生成 TestAndroidModule 模块的 AAR 文件
+                ":Test:TestAndroidModule:assembleRelease",
+                //例如：生成 TestJavaModule 模块的 JAR 文件
+                ":Test:TestJavaModule:assemble"
+        ],
+
+        //用于无用文件清理
+        //插件执行第一步，会先删除这个路径下的文件
+        clearPath            : [
+                clear1,
+                clear2
+        ],
+
+        //需要从 JAR 包中过滤的文件
+        //主要用于过滤某些不想打进 JAR 包中的文件
+//        excludesFromJar      : [
+//                //例如：R 文件不打进 JAR 包
+//                "**/R.class",
+//        ],
+
+        //需要执行导出 JAR 包任务的 JAR / AAR 位置
+        //多个 JAR / AAR 会触发合并操作，最终只会生成一个 JAR
+        inputJarPath         : [
+                jarPath,
+                androidModule,
+                javaModule
+        ],
+
+        //导出 JAR 包的名字
+        //默认为：buildJar.jar
+        jarName              : 'xxxxx',
+
+        //JAR 包导出路径
+        //默认地址为：**/build/jar/
+        outputJarPath        : project.projectDir.path + File.separator + outPath,
+
+        //准备混淆的 JAR 包位置
+        //默认为 JAR 包的导出位置，即：outputJarPath + jarName
+        inputProGuardJarPath : '',
+
+        //混淆后 JAR 包的名称
+        //默认为：jarName + '-ProGuard.jar'
+        proGuardJarName      : '',
+
+        //混淆后 JAR 包的位置
+        //默认为 JAR 包的导出位置，即：outputJarPath
+        outputProGuardJarPath: '',
+
+//        //所依赖三方库的本地路径
+//        //方便用于混淆时，完善混淆规则
+//        //如果混淆文件配置完善，此处可以不传
+//        proGuardLibrarys     : ["", "", ""],
+
+        //混淆时，是否移除无用资源，true：移除；false：不移除
+        //默认为：true
+        isShrink             : false,
+
+        //混淆文件的名称
+        //默认为：proguard-rules.pro
+        //自动选择当前 module 下的对应名称的混淆文件
+        rulesPath            : 'proguard-rules.pro',
+]
+
+apply plugin: 'com.cloud.buildjar'
+
+
+
+
+
+
+

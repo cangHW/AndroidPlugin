@@ -11,7 +11,7 @@ class ClearJarTask extends BaseDelete {
 
     @Override
     protected void clean() {
-        BuildJarExtension buildJarExtension = project.buildJar
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         delete(buildJarExtension.getClearPath())
         super.clean()
     }

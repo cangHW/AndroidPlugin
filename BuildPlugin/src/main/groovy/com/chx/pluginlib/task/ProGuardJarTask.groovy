@@ -13,7 +13,7 @@ class ProGuardJarTask extends BaseProGuard {
 
     @Override
     void proguard() throws ParseException, IOException {
-        BuildJarExtension buildJarExtension = project.buildJar
+        BuildJarExtension buildJarExtension = project.buildJarExtension
         setJarParams(buildJarExtension)
         addRunTime()
         addLibrarys(buildJarExtension)
