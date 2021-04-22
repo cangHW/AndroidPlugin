@@ -101,7 +101,7 @@ ext.CloudPluginData = [
         //默认为 JAR 包的导出位置，即：outputJarPath
         outputProGuardJarPath: '',
 
-//        //所依赖三方库的本地路径
+//        //所依赖三方库的本地路径，默认不需要设置
 //        //方便用于混淆时，完善混淆规则
 //        //如果混淆文件配置完善，此处可以不传
 //        proGuardLibrarys     : ["", "", ""],

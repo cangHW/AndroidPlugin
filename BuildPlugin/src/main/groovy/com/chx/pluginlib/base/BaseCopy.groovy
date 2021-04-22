@@ -2,7 +2,7 @@ package com.chx.pluginlib.base
 
 import org.gradle.api.Project
 import org.gradle.api.specs.Spec
-import org.gradle.api.tasks.Copy;
+import org.gradle.api.tasks.Copy
 
 /**
  * @author: cangHX

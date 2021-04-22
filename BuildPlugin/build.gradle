@@ -1,4 +1,5 @@
 apply plugin: 'groovy'
+apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -25,25 +26,12 @@ targetCompatibility = "7"
 
 
 ext {
-    bintrayName = artifactName
-    artifact = bintrayName
+    artifact = artifactName
     libraryName = '一个用于混淆打包的依赖库'
     libraryDescription = '一个用于混淆打包的依赖库'
     libraryVersion = PluginLibVersion
 }
 
 
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'
-
-
-Task bintrayUpload =tasks.getByName("bintrayUpload")
-Task clean =tasks.getByName("clean")
-Task upload =tasks.create("upload")
-upload.setGroup("upload")
-upload.doLast {
-    println("上传成功")
-}
-
-bintrayUpload.dependsOn(clean)
-upload.dependsOn(bintrayUpload)
+apply from: '../publish.gradle'
+apply from: '../upload.gradle'

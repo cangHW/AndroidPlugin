@@ -5,6 +5,7 @@ import com.chx.pluginlib.task.BuildJarTask
 import com.chx.pluginlib.task.ClearJarTask
 import com.chx.pluginlib.task.ProGuardJarTask
 import com.chx.pluginlib.utils.DataConverter
+import com.chx.pluginlib.xml.PluginXmlParser
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -24,6 +25,7 @@ class PluginImpl implements Plugin<Project> {
             System.err.println("You need to create the CloudPluginData{} first and then rely on the remote plug-in：apply plugin: 'com.cloud.buildjar'")
             throw new IllegalAccessError("Check the build log")
         }
+        PluginXmlParser.parser(project)
         createTask(project)
     }
 
@@ -61,7 +63,7 @@ class PluginImpl implements Plugin<Project> {
 
         Task currentTask = null
         for (int i = 0; i < pluginTasks.size(); i++) {
-            Task it =  (Task)pluginTasks[i]
+            Task it = (Task) pluginTasks[i]
 
             if (currentTask == null) {
                 it.dependsOn(buildJarExtension.doFirstTask)

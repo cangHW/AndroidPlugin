@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
+      <module name="AndroidPlugin.app" target="1.8" />
       <module name="AndroidPlugin.Test-TestJavaModule" target="1.7" />
+      <module name="AndroidPlugin.Test.BuildJar" target="1.8" />
+      <module name="AndroidPlugin.Test.TestAndroidModule" target="1.8" />
       <module name="BuildPlugin" target="1.7" />
+      <module name="Plugin.app" target="1.8" />
+      <module name="Plugin.Test.BuildJar" target="1.8" />
+      <module name="Plugin.Test.TestAndroidModule" target="1.8" />
       <module name="TestJavaModule" target="1.7" />
     </bytecodeTargetLevel>
   </component>

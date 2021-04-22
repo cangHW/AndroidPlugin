@@ -115,7 +115,7 @@ class DataConverter {
 
         log.println("********** END CHECK DATA *************")
 
-        return extension;
+        return extension
     }
 
 }

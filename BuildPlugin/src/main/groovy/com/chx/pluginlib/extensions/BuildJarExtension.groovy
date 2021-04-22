@@ -70,7 +70,7 @@ class BuildJarExtension {
     /**
      * 混淆所需要的依赖文件路径
      * */
-    String[] proGuardLibrarys = []
+    ArrayList<String> proGuardLibrarys = []
 
     /**
      * 混淆文件的路径
@@ -146,7 +146,7 @@ class BuildJarExtension {
         return isShrink
     }
 
-    String[] getProGuardLibrarys() {
+    ArrayList<String> getProGuardLibrarys() {
         return proGuardLibrarys
     }
 

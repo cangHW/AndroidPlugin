@@ -1,6 +1,10 @@
 include ':app'
 include ':BuildPlugin'
+
+
 include ':Test:BuildJar'
 include ':Test:TestAndroidModule'
 include ':Test:TestJavaModule'
-rootProject.name = 'AndroidPlugin'
+
+
+//rootProject.name = 'Plugin'

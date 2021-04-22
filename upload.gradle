@@ -1,0 +1,20 @@
+Task assemble
+
+if (project.hasProperty("android")) {
+    assemble = tasks.getByName("assemble")
+}else {
+    Task clean = tasks.getByName("clean")
+    assemble = tasks.getByName("assemble")
+    assemble.dependsOn(clean)
+}
+
+Task repository = tasks.getByName("publishReleasePublicationToMavenRepository")
+Task upload = tasks.create("upload")
+
+upload.setGroup("upload")
+upload.doLast {
+    println("上传成功")
+}
+
+repository.dependsOn(assemble)
+upload.dependsOn(repository)
