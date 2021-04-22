@@ -12,7 +12,7 @@
 
 | 最新版本号 | 地址 |
 | :--: | :--: |
-| 1.0.0 | com.chx.plugin:buildJar:"版本号" |
+| 1.0.0 | io.github.cangHW:buildJar:"版本号" |
 
 # 一、提供功能
 
