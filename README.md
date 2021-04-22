@@ -27,12 +27,12 @@
     buildscript {
             repositories {
                 google()
-                jcenter()
+                mavenCentral()
             }
             dependencies {
                 classpath 'com.android.tools.build:gradle:X.X.X'
                 //添加插件依赖
-                classpath 'com.chx.plugin:buildJar:X.X.X'
+                classpath 'io.github.cangHW:buildJar:X.X.X'
                 .
                 .
                 .
