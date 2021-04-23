@@ -6,8 +6,22 @@
 
 <br/>
 
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Maven Central](https://img.shields.io/maven-central/v/io.github.cangHW/buildJar.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.cangHW%22%20AND%20a:%22buildJar%22)
 
+<br/>
+
+目前 Android Studio 默认支持 mavenCentral，如果您使用的版本没有默认添加 mavenCentral 库，请在项目根目录的 build.gradle 中添加以下仓库：
+
+    buildscript {
+        repositories {
+            mavenCentral()
+            。
+            。
+            。
+        }
+    }
+
+如果已经添加，则忽略。
 <br/>
 
 | 最新版本号 | 地址 |
@@ -55,21 +69,21 @@
         .
     ]
     
-| key | value | 作用 |
+| key | value | 必传 | 作用 |
 | :--: | :--: | :--: |
-| group | 字符串："" | 任务组名称，默认为：pluglib |
-| doFirstTask | 数组：[] | 前置任务，插件执行之前需要提前执行的任务。</br> 主要用于生成 JAR 包合并，在合并前生成 JAR 包 |
-| clearPath | 数组：[] | 用于无用文件清理,插件执行时，会先删除这些路径下的文件 |
-| excludesFromJar | 数组：[] | 用于过滤某些不想打进 JAR 包中的文件 |
-| inputJarPath | 数组：[] | 需要执行导出 JAR 包任务的 JAR / AAR 位置，多个地址会触发合并操作，最终只会生成一个 JAR |
-| jarName | 字符串："" | 导出 JAR 包的名字，默认为：buildJar.jar |
-| outputJarPath | 字符串："" | JAR 包导出路径，默认为：**/build/jar/ |
-| inputProGuardJarPath | 字符串："" | 准备混淆的 JAR 包位置，默认为 JAR 包的导出位置，即：outputJarPath + jarName |
-| proGuardJarName | 字符串："" | 混淆后 JAR 包的名称，默认为：jarName + '-ProGuard.jar' |
-| outputProGuardJarPath | 字符串："" | 混淆后 JAR 包的位置，默认为 JAR 包的导出位置，即：outputJarPath |
-| proGuardLibrarys | 数组：[] | 所依赖三方库的本地路径，方便用于混淆时，完善混淆规则，如果混淆文件配置合理，此处可以不传 |
-| isShrink | 布尔：true / false | 混淆时，是否移除无用资源，true：移除；false：不移除，默认为：true |
-| rulesPath | 字符串："" | 混淆文件的名称，自动选择当前 module 下的对应名称的混淆文件，默认为：proguard-rules.pro |
+| inputJarPath | 数组：[] | 是 | 需要执行导出 JAR 包任务的 JAR / AAR 位置，多个地址会触发合并操作，最终只会生成一个 JAR |
+| group | 字符串："" | 否 | 任务组名称，默认为：pluglib |
+| doFirstTask | 数组：[] | 否 | 前置任务，插件执行之前需要提前执行的任务。</br> 主要用于生成 JAR 包合并，在合并前生成 JAR 包 |
+| clearPath | 数组：[] | 否 | 用于无用文件清理,插件执行时，会先删除这些路径下的文件 |
+| excludesFromJar | 数组：[] | 否 | 用于过滤某些不想打进 JAR 包中的文件 |
+| jarName | 字符串："" | 否 | 导出 JAR 包的名字，默认为：buildJar.jar |
+| outputJarPath | 字符串："" | 否 | JAR 包导出路径，默认为：**/build/jar/ |
+| inputProGuardJarPath | 字符串："" | 否 | 准备混淆的 JAR 包位置，默认为 JAR 包的导出位置，即：outputJarPath + jarName |
+| proGuardJarName | 字符串："" | 否 | 混淆后 JAR 包的名称，默认为：jarName + '-ProGuard.jar' |
+| outputProGuardJarPath | 字符串："" | 否 | 混淆后 JAR 包的位置，默认为 JAR 包的导出位置，即：outputJarPath |
+| proGuardLibrarys | 数组：[] | 否 | 所依赖三方库的本地路径，方便用于混淆时，完善混淆规则，如果混淆文件配置合理，此处可以不传 |
+| isShrink | 布尔：true / false | 否 | 混淆时，是否移除无用资源，true：移除；false：不移除，默认为：true |
+| rulesPath | 字符串："" | 否 | 混淆文件的名称，自动选择当前 module 下的对应名称的混淆文件，默认为：proguard-rules.pro |
 
 ## 2、引用插件
 需要在配置完参数之后引用插件，插件被引用后，会自动使用配置的参数
