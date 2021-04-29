@@ -116,7 +116,9 @@ ext.CloudPluginData = [
         rulesPath            : 'proguard-rules.pro',
 ]
 
-apply plugin: 'com.cloud.buildjar'
+if (Boolean.parseBoolean(isFromMaven)) {
+    apply plugin: 'com.cloud.buildjar'
+}
 
 
 

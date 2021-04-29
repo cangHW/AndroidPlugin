@@ -2,9 +2,9 @@
 
 buildscript {
     repositories {
-//        maven {
-//            url 'file://' + projectDir + '/maven'
-//        }
+        maven {
+            url 'file://' + projectDir + '/maven'
+        }
 
         google()
         mavenCentral()
@@ -16,9 +16,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath "io.github.cangHW:buildJar:${PluginLibVersion}"
+        if (Boolean.parseBoolean(isFromMaven)) {
+            classpath "io.github.cangHW:buildJar:${PluginLibVersion}"
+        }
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.4.10.2"
 
+        classpath 'io.github.cangHW:Cloud-Plugin:1.0.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -27,9 +30,9 @@ buildscript {
 allprojects {
     repositories {
 
-//        maven {
-//            url 'file://' + projectDir + '/maven'
-//        }
+        maven {
+            url 'file://' + projectDir + '/maven'
+        }
 
         google()
         mavenCentral()

@@ -24,17 +24,26 @@
 如果已经添加，则忽略。
 <br/>
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.cangHW/buildJar.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.cangHW%22%20AND%20a:%22buildJar%22)
+
 | 最新版本号 | 地址 |
 | :--: | :--: |
-| 1.0.0 | io.github.cangHW:buildJar:"版本号" |
+| 1.1.0 | io.github.cangHW:buildJar:"版本号" |
 
-# 一、提供功能
+# 一、更新说明
+
+| 版本号 | 说明 |
+| :--: | :--: |
+| 1.1.0 | 自动获取本地依赖，完善对高版本 gradle 支持 |
+| 1.0.0 | 提供合并打包、混淆等功能 |
+
+# 二、提供功能
 
 1. 清除无用文件
 2. 合并并导出 JAR 包
 3. 对 JAR 包混淆
 
-# 二、添加依赖和配置
+# 三、添加依赖和配置
 
 在工程根目录中的 build.gradle 中添加
 
@@ -56,7 +65,7 @@
             }
         }
         
-# 三、使用方式      
+# 四、使用方式      
 
 ## 1、配置参数
 在准备执行脚本的模块中的 build.gradle 中添加，参数可选，按需添加
@@ -109,7 +118,7 @@
 </br>
 例如：只需要对 JAR 包进行混淆，则在参数配置中，只配置混淆相关的参数即可
 
-# 四、常见问题
+# 五、常见问题
 
 ##问题一
 
@@ -136,7 +145,7 @@
     ]
     apply plugin: 'com.cloud.buildjar'
 
-# 五、交流学习
+# 六、交流学习
 
     QQ   :  1163478116
     微信  :  1163478116
