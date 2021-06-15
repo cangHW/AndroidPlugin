@@ -98,6 +98,9 @@ class BuildJarExtension {
     }
 
     String getOutputJarPath() {
+        if (outputJarPath == null || outputJarPath.trim() == "") {
+            return outputJarPath
+        }
         if (outputJarPath.endsWith(File.separator)) {
             return outputJarPath
         }
@@ -105,6 +108,9 @@ class BuildJarExtension {
     }
 
     String getJarName() {
+        if (jarName == null || jarName.trim() == "") {
+            return jarName
+        }
         if (jarName.endsWith(".jar")) {
             return jarName
         }
@@ -112,7 +118,7 @@ class BuildJarExtension {
     }
 
     String getInputProGuardJarPath() {
-        if (inputProGuardJarPath != null && inputProGuardJarPath != "") {
+        if (inputProGuardJarPath != null && inputProGuardJarPath.trim() != "") {
             if (inputProGuardJarPath.endsWith(File.separator)) {
                 return inputProGuardJarPath
             }

@@ -11,8 +11,19 @@ class BuildJarTask extends BaseJar {
 
     BuildJarTask() {
         BuildJarExtension buildJarExtension = project.buildJarExtension
-        archiveFileName.set(buildJarExtension.getJarName())
-        destinationDirectory.set(new File(buildJarExtension.getOutputJarPath()))
+
+        try {
+            archiveFileName.set(buildJarExtension.getJarName())
+        } catch (Throwable ignored) {
+            setArchiveName(buildJarExtension.getJarName())
+        }
+
+        try {
+            destinationDirectory.set(new File(buildJarExtension.getOutputJarPath()))
+        } catch (Throwable ignored) {
+            setDestinationDir(new File(buildJarExtension.getOutputJarPath()))
+        }
+
     }
 
     @Override
