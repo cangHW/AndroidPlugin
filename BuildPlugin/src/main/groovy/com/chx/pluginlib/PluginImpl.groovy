@@ -17,16 +17,22 @@ class PluginImpl implements Plugin<Project> {
     @Override
     void apply(Project project) {
 
-        System.out.println("********** PLUGIN BUILD-JAR START *************")
-        System.out.println("")
+        println("************************** PLUGIN BUILD-JAR START **************************")
+        println("")
 
         if (!createExtensions(project)) {
             System.err.println("The Plugin init error, please check the CloudPluginData{}")
             System.err.println("You need to create the CloudPluginData{} first and then rely on the remote plug-in：apply plugin: 'com.cloud.buildjar'")
             throw new IllegalAccessError("Check the build log")
         }
+
+        println("")
+
         PluginXmlParser.parser(project)
         createTask(project)
+
+        println("************************** PLUGIN BUILD-JAR END **************************")
+        println("")
     }
 
     static boolean createExtensions(Project project) {
@@ -52,10 +58,11 @@ class PluginImpl implements Plugin<Project> {
         pluginTasks.add(clearJarTask)
 
         if (buildJarExtension.inputJarPath.length != 0) {
-            BuildJarTask buildJarTask = project.tasks.create(name: "buildJar", group: group, type: BuildJarTask)
+            BuildJarTask buildJarTask = project.tasks.create(name: "buildJarTask", group: group, type: BuildJarTask)
             pluginTasks.add(buildJarTask)
         } else {
-            System.out.println("clear BuildJarTask")
+            System.err.println("inputJarPath cannot be null")
+            throw new IllegalAccessError("Check the inputJarPath")
         }
 
         ProGuardJarTask proGuardJarTask = project.tasks.create(name: "proGuardJarTask", group: group, type: ProGuardJarTask)

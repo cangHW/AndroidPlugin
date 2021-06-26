@@ -13,6 +13,10 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 class PluginXmlParser {
     static void parser(Project project) {
+
+        println("************* START XML PARSER *************")
+        println("")
+
         BuildJarExtension buildJarExtension = project.buildJarExtension
 
         String path = project.rootDir.path + File.separator + ".idea" + File.separator + "libraries"
@@ -33,6 +37,8 @@ class PluginXmlParser {
         }
 
         println("gradle 缓存地址 : " + gPath)
+
+        def num = 0
 
         file.traverse { it ->
             try {
@@ -68,13 +74,22 @@ class PluginXmlParser {
                             url = url.replace("\$PROJECT_DIR\$", project.rootDir.path)
                         }
 
-                        println("发现依赖文件地址 : " + url)
+                        println("发现依赖文件地址 " + num + " : " + url)
                         buildJarExtension.proGuardLibrarys.add(url)
+                        num++
                     }
                 }
             } catch (Throwable throwable) {
                 throwable.printStackTrace()
             }
         }
+
+        println("")
+
+        println("共发现依赖文件 : " + num + " 个")
+
+        println("")
+        println("************* END XML PARSER *************")
+        println("")
     }
 }

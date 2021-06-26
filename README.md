@@ -106,22 +106,22 @@
 | 脚本名称 | 作用 |
 | :--: | :--: |
 | clearJarTask | 根据配置参数，清理无用文件 |
-| buildJar | 根据配置参数，导出 JAR 包 |
+| buildJarTask | 根据配置参数，导出 JAR 包 |
 | proGuardJarTask | 根据配置参数，对 JAR 包进行混淆 |
 
 根据常用习惯，目前脚本已经添加的执行顺序有：
 </br>
 
-1. clearJarTask ——> buildJar ——> proGuardJarTask。
+1. clearJarTask ——> buildJarTask ——> proGuardJarTask。
 
 当执行某一个任务时，会根据顺序，自动执行前置任务。</br>
-例如：只需要导出 JAR 包，则只需执行对应模块下面的 buildJar 任务即可，buildJar 任务执行前会自动执行 clearJarTask 任务，方便开发者删除上次生成的 jar 包。
+例如：只需要导出 JAR 包，则只需执行对应模块下面的 buildJarTask 任务即可，buildJarTask 任务执行前会自动执行 clearJarTask 任务，方便开发者删除上次生成的 jar 包。
 </br>
 例如：只需要对 JAR 包进行混淆，则在参数配置中，只配置混淆相关的参数即可
 
 # 五、常见问题
 
-##问题一
+## 问题一
 
 提示：Check the build log
 
@@ -145,6 +145,22 @@
         .
     ]
     apply plugin: 'com.cloud.buildjar'
+
+## 问题二
+
+提示：Check the inputJarPath
+
+    inputJarPath cannot be null
+
+原因：
+    
+    没有配置 inputJarPath
+    
+解决方案：
+    
+    请配置 inputJarPath
+
+
 
 # 六、交流学习
 

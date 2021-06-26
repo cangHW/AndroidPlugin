@@ -10,52 +10,50 @@ class DataConverter {
 
     static BuildJarExtension converter(BuildJarExtension extension, Object object, Project project) {
 
-        def log = System.out
-
-        log.println("********** START CHECK DATA *************")
-        log.println("")
+        println("************* START CHECK DATA *************")
+        println("")
 
         String group = object.group
         if (group != null && group.trim() != "") {
             extension.group = group
         }
-        log.println("       group : " + extension.group)
-        log.println("")
+        println("       group : " + extension.group)
+        println("")
 
         String[] doFirstTask = object.doFirstTask
         if (doFirstTask != null && doFirstTask.length != 0) {
             extension.doFirstTask = doFirstTask
         }
-        log.println("       doFirstTask : " + extension.doFirstTask)
-        log.println("")
+        println("       doFirstTask : " + extension.doFirstTask)
+        println("")
 
         String[] clearPath = object.clearPath
         if (clearPath != null && clearPath.length != 0) {
             extension.clearPath = clearPath
         }
-        log.println("       clearPath : " + extension.clearPath)
-        log.println("")
+        println("       clearPath : " + extension.clearPath)
+        println("")
 
         String[] excludesFromJar = object.excludesFromJar
         if (excludesFromJar != null && excludesFromJar.length != 0) {
             extension.excludesFromJar = excludesFromJar
         }
-        log.println("       excludesFromJar : " + extension.excludesFromJar)
-        log.println("")
+        println("       excludesFromJar : " + extension.excludesFromJar)
+        println("")
 
         String[] inputJarPath = object.inputJarPath
         if (inputJarPath != null && inputJarPath.length != 0) {
             extension.inputJarPath = inputJarPath
         }
-        log.println("       inputJarPath : " + extension.inputJarPath)
-        log.println("")
+        println("       inputJarPath : " + extension.inputJarPath)
+        println("")
 
         String jarName = object.jarName
         if (jarName != null && jarName.trim() != "") {
             extension.jarName = jarName
         }
-        log.println("       jarName : " + extension.jarName)
-        log.println("")
+        println("       jarName : " + extension.jarName)
+        println("")
 
         String outputJarPath = object.outputJarPath
         if (outputJarPath != null && outputJarPath.trim() != "") {
@@ -64,29 +62,29 @@ class DataConverter {
         if (extension.outputJarPath == null || extension.outputJarPath.trim() == ""){
             extension.outputJarPath = project.buildDir.path + File.separator + "jar"
         }
-        log.println("       outputJarPath : " + extension.outputJarPath)
-        log.println("")
+        println("       outputJarPath : " + extension.outputJarPath)
+        println("")
 
         String inputProGuardJarPath = object.inputProGuardJarPath
         if (inputProGuardJarPath != null && inputProGuardJarPath.trim() != "") {
             extension.inputProGuardJarPath = inputProGuardJarPath
         }
-        log.println("       inputProGuardJarPath : " + extension.inputProGuardJarPath)
-        log.println("")
+        println("       inputProGuardJarPath : " + extension.inputProGuardJarPath)
+        println("")
 
         String proGuardJarName = object.proGuardJarName
         if (proGuardJarName != null && proGuardJarName.trim() != "") {
             extension.proGuardJarName = proGuardJarName
         }
-        log.println("       proGuardJarName : " + extension.proGuardJarName)
-        log.println("")
+        println("       proGuardJarName : " + extension.proGuardJarName)
+        println("")
 
         String outputProGuardJarPath = object.outputProGuardJarPath
         if (outputProGuardJarPath != null && outputProGuardJarPath.trim() != "") {
             extension.outputProGuardJarPath = outputProGuardJarPath
         }
-        log.println("       outputProGuardJarPath : " + extension.outputProGuardJarPath)
-        log.println("")
+        println("       outputProGuardJarPath : " + extension.outputProGuardJarPath)
+        println("")
 
         def isShrink = object.isShrink
         if (isShrink != null) {
@@ -96,24 +94,24 @@ class DataConverter {
                 System.err.println("isShrink can only use type Boolean")
             }
         }
-        log.println("       isShrink : " + extension.isShrink)
-        log.println("")
+        println("       isShrink : " + extension.isShrink)
+        println("")
 
         String[] proGuardLibrarys = object.proGuardLibrarys
         if (proGuardLibrarys != null && proGuardLibrarys.length != 0) {
             extension.proGuardLibrarys = proGuardLibrarys
         }
-        log.println("       proGuardLibrarys : " + extension.proGuardLibrarys)
-        log.println("")
+        println("       proGuardLibrarys : " + extension.proGuardLibrarys)
+        println("")
 
         String rulesPath = object.rulesPath
         if (rulesPath != null && rulesPath.trim() != "") {
             extension.rulesPath = rulesPath
         }
-        log.println("       rulesPath : " + extension.rulesPath)
-        log.println("")
+        println("       rulesPath : " + extension.rulesPath)
+        println("")
 
-        log.println("********** END CHECK DATA *************")
+        println("************* END CHECK DATA *************")
 
         return extension
     }
