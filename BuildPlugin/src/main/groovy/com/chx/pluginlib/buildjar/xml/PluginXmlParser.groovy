@@ -1,6 +1,6 @@
-package com.chx.pluginlib.xml
+package com.chx.pluginlib.buildjar.xml
 
-import com.chx.pluginlib.extensions.BuildJarExtension
+import com.chx.pluginlib.buildjar.extensions.BuildJarExtension
 import org.gradle.api.Project
 import org.gradle.internal.os.OperatingSystem
 import org.w3c.dom.Document

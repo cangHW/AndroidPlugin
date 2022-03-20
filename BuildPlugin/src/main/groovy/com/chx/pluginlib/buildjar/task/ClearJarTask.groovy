@@ -1,7 +1,7 @@
-package com.chx.pluginlib.task
+package com.chx.pluginlib.buildjar.task
 
 import com.chx.pluginlib.base.BaseDelete
-import com.chx.pluginlib.extensions.BuildJarExtension
+import com.chx.pluginlib.buildjar.extensions.BuildJarExtension
 
 /**
  * @author: cangHX

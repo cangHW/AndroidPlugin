@@ -1,8 +1,8 @@
-package com.chx.pluginlib.task
+package com.chx.pluginlib.buildjar.task
 
 import com.chx.pluginlib.base.BaseJar
-import com.chx.pluginlib.extensions.BuildJarExtension
-import com.chx.pluginlib.utils.JarUtils
+import com.chx.pluginlib.buildjar.extensions.BuildJarExtension
+import com.chx.pluginlib.buildjar.utils.JarUtils
 
 /**
  * @author: cangHX* on 2020/06/15  10:53

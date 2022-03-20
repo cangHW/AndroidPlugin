@@ -1,11 +1,11 @@
-package com.chx.pluginlib
+package com.chx.pluginlib.buildjar
 
-import com.chx.pluginlib.extensions.BuildJarExtension
-import com.chx.pluginlib.task.BuildJarTask
-import com.chx.pluginlib.task.ClearJarTask
-import com.chx.pluginlib.task.ProGuardJarTask
-import com.chx.pluginlib.utils.DataConverter
-import com.chx.pluginlib.xml.PluginXmlParser
+import com.chx.pluginlib.buildjar.extensions.BuildJarExtension
+import com.chx.pluginlib.buildjar.task.BuildJarTask
+import com.chx.pluginlib.buildjar.task.ClearJarTask
+import com.chx.pluginlib.buildjar.task.ProGuardJarTask
+import com.chx.pluginlib.buildjar.utils.DataConverter
+import com.chx.pluginlib.buildjar.xml.PluginXmlParser
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task

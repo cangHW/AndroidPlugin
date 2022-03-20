@@ -116,11 +116,49 @@ ext.CloudPluginData = [
         rulesPath            : 'proguard-rules.pro',
 ]
 
-apply plugin: 'com.cloud.buildjar'
+if (Boolean.parseBoolean(isFromMaven)) {
+    apply plugin: 'com.cloud.buildjar'
+    apply plugin: 'com.cloud.pluginlib'
+}
 
 
+tasks.create(name:"depende", group: 'asd') doLast{
+    System.err.println("project = " + project)
+    logProject(project)
+}
+
+def logProject(Project project){
+    project.configurations.each { config->
+        System.err.println(config.getName())
+        config.dependencies.each { dependency->
+            log(dependency)
+        }
+    }
+}
 
 
-
+def log(org.gradle.api.artifacts.Dependency dependency){
+//    if (dependency instanceof org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency){
+//        System.err.println("")
+//        System.err.println("group = " + dependency.getGroup())
+//        System.err.println("name = " + dependency.getName())
+//        System.err.println("version = " + dependency.getVersion())
+//        System.err.println("")
+//    }else if (dependency instanceof org.gradle.api.internal.artifacts.dependencies.DefaultProjectDependency){
+//        def projectDependency = dependency as org.gradle.api.internal.artifacts.dependencies.DefaultProjectDependency
+//        System.err.println("")
+//        System.err.println("dependencyProject = " + projectDependency.getDependencyProject())
+//        System.err.println("****************************************")
+//        logProject(projectDependency.getDependencyProject())
+//        System.err.println("****************************************")
+//        System.err.println("")
+//    }else if (dependency instanceof org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency){
+//        def selfResolvingDependency = dependency as org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency
+//        System.err.println("")
+//        System.err.println("buildDependencies = " + selfResolvingDependency.getBuildDependencies())
+//        System.err.println("targetComponentId = " + selfResolvingDependency.getTargetComponentId())
+//        System.err.println("")
+//    }
+}
 
 

@@ -1,6 +1,6 @@
-package com.chx.pluginlib.utils
+package com.chx.pluginlib.buildjar.utils
 
-import com.chx.pluginlib.extensions.BuildJarExtension
+import com.chx.pluginlib.buildjar.extensions.BuildJarExtension
 import org.gradle.api.Project
 
 /**

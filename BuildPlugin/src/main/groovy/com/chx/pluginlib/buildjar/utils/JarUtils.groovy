@@ -1,4 +1,4 @@
-package com.chx.pluginlib.utils
+package com.chx.pluginlib.buildjar.utils
 
 import org.gradle.api.Project
 

@@ -11,27 +11,31 @@ sourceCompatibility = "7"
 targetCompatibility = "7"
 
 
-apply plugin: 'maven'
-uploadArchives {
-    repositories.mavenDeployer {
-        def mavenDirPath = file(project.projectDir.path + File.separator + "plugin")
-        repository(url: "file://${mavenDirPath.absolutePath}")
-        pom.project {
-            groupId publishedGroupId
-            artifactId artifactName
-            version PluginLibVersion
-        }
-    }
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        def mavenDirPath = file(project.projectDir.path + File.separator + "plugin")
+//        repository(url: "file://${mavenDirPath.absolutePath}")
+//        pom.project {
+//            groupId publishedGroupId
+//            artifactId artifactName
+//            version PluginLibVersion
+//        }
+//    }
+//}
+
+
+ext {
+    artifact = artifactName
+    libraryName = '一个用于混淆打包的依赖库'
+    libraryDescription = '一个用于混淆打包的依赖库'
+    libraryVersion = PluginLibVersion
 }
 
 
-//ext {
-//    artifact = artifactName
-//    libraryName = '一个用于混淆打包的依赖库'
-//    libraryDescription = '一个用于混淆打包的依赖库'
-//    libraryVersion = PluginLibVersion
-//}
-//
-//
-//apply from: '../publish.gradle'
-//apply from: '../upload.gradle'
+apply from: '../publish.gradle'
+apply from: '../upload.gradle'
+
+
+
+

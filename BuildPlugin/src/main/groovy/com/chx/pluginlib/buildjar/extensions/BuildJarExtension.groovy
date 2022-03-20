@@ -1,4 +1,6 @@
-package com.chx.pluginlib.extensions
+package com.chx.pluginlib.buildjar.extensions
+
+import com.chx.pluginlib.constants.Constants
 
 /**
  * @author: cangHX* on 2020/06/15  10:28
@@ -8,7 +10,7 @@ class BuildJarExtension {
     /**
      * 任务组名称
      * */
-    String group = "pluglib"
+    String group = Constants.DEFAULT_GROUP
 
     /**
      * 执行插件之前，先执行的任务
