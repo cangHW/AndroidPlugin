@@ -32,7 +32,7 @@ class DependencyUtils {
     private static void parserDependency(String configuration, Dependency dependency, ArrayList<BaseDependencyInfo> dependencyInfos) {
         if (dependency instanceof DefaultExternalModuleDependency) {
             ModuleDependencyInfo moduleDependencyInfo = new ModuleDependencyInfo()
-            moduleDependencyInfo.setConfiguration(configuration.getName())
+            moduleDependencyInfo.setConfiguration(configuration)
             moduleDependencyInfo.setGroup(dependency.getGroup())
             moduleDependencyInfo.setName(dependency.getName())
             moduleDependencyInfo.setVersion(dependency.getVersion())
@@ -41,9 +41,9 @@ class DependencyUtils {
             dependencyInfos.add(parser(configuration, dependency.getDependencyProject()))
         } else if (dependency instanceof DefaultSelfResolvingDependency) {
             SelfResolvingDependencyInfo selfResolvingDependencyInfo = new SelfResolvingDependencyInfo()
-            selfResolvingDependencyInfo.setConfiguration(configuration.getName())
-            selfResolvingDependencyInfo.setBuildDependencies(dependency.getBuildDependencies())
-            selfResolvingDependencyInfo.setTargetComponentId(dependency.getTargetComponentId())
+            selfResolvingDependencyInfo.setConfiguration(configuration)
+            selfResolvingDependencyInfo.setBuildDependencies(dependency.getBuildDependencies().toString())
+            selfResolvingDependencyInfo.setTargetComponentId(dependency.getTargetComponentId().toString())
             dependencyInfos.add(selfResolvingDependencyInfo)
         }
     }

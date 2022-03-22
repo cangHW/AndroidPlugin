@@ -130,9 +130,9 @@ tasks.create(name:"depende", group: 'asd') doLast{
 def logProject(Project project){
     project.configurations.each { config->
         System.err.println(config.getName())
-        config.dependencies.each { dependency->
-            log(dependency)
-        }
+//        config.dependencies.each { dependency->
+//            log(dependency)
+//        }
     }
 }
 
